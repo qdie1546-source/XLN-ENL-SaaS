@@ -1,0 +1,153 @@
+/* Vintage Theme - 复古风格 */
+:root {
+    --primary: #b45309;
+    --primary-hover: #92400e;
+    --bg: #fef3c7;
+    --bg-secondary: #fde68a;
+    --text: #451a03;
+    --text-secondary: #78350f;
+    --card-bg: #fffbeb;
+    --border: #d97706;
+    --shadow: 0 4px 6px -1px rgba(180, 83, 9, 0.1);
+    --radius: 0.5rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px dashed var(--border);
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.75rem;
+    color: var(--primary);
+    border: 3px solid var(--border);
+}
+
+.name {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+.bio {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.link {
+    display: block;
+    padding: 1rem 1.5rem;
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    text-align: center;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow);
+    position: relative;
+}
+
+.link::before {
+    content: '✦';
+    margin-right: 0.5rem;
+    color: var(--primary);
+}
+
+.link::after {
+    content: '✦';
+    margin-left: 0.5rem;
+    color: var(--primary);
+}
+
+.link:hover {
+    background: var(--bg-secondary);
+    border-color: var(--primary);
+    transform: translateY(-2px) rotate(-1deg);
+    box-shadow: 4px 4px 0 var(--border);
+}
+
+.link:active {
+    transform: translateY(0) rotate(0);
+}
+
+.footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px dashed var(--border);
+}
+
+.footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    transition: color 0.2s ease;
+}
+
+.footer a:hover {
+    color: var(--primary-hover);
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: 2rem 1rem;
+    }
+    
+    .avatar {
+        width: 90px;
+        height: 90px;
+        font-size: 2.5rem;
+    }
+    
+    .name {
+        font-size: 1.625rem;
+    }
+    
+    .link {
+        padding: 0.875rem 1.25rem;
+    }
+}

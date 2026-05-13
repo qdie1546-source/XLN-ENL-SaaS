@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkHub 安装向导</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200">
+        <div class="max-w-4xl mx-auto px-6 py-4">
+            <div class="flex items-center">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-semibold text-slate-900">LinkHub</h1>
+                        <p class="text-sm text-slate-500">社交链接聚合平台</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 py-10">
+        <!-- Progress Section -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-medium text-slate-900">安装向导</h2>
+                <span class="text-sm text-slate-500" id="progress-text">步骤 1 / 4</span>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-200 rounded-full h-2 mb-6">
+                <div class="bg-blue-600 h-2 rounded-full transition-all duration-500" id="progress-bar" style="width: 25%;"></div>
+            </div>
+            
+            <!-- Steps -->
+            <div class="grid grid-cols-4 gap-4">
+                <div class="text-center">
+                    <div class="w-10 h-10 mx-auto rounded-xl flex items-center justify-center text-sm font-medium bg-blue-600 text-white" id="step1-indicator">1</div>
+                    <p class="mt-2 text-sm font-medium text-slate-900">环境检测</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-10 h-10 mx-auto rounded-xl flex items-center justify-center text-sm font-medium bg-slate-200 text-slate-500" id="step2-indicator">2</div>
+                    <p class="mt-2 text-sm font-medium text-slate-500">配置信息</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-10 h-10 mx-auto rounded-xl flex items-center justify-center text-sm font-medium bg-slate-200 text-slate-500" id="step3-indicator">3</div>
+                    <p class="mt-2 text-sm font-medium text-slate-500">执行安装</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-10 h-10 mx-auto rounded-xl flex items-center justify-center text-sm font-medium bg-slate-200 text-slate-500" id="step4-indicator">4</div>
+                    <p class="mt-2 text-sm font-medium text-slate-500">完成</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Card -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm">
+            <!-- Step 1: Environment Check -->
+            <div id="step1" class="step-content p-8">
+                <h3 class="text-lg font-semibold text-slate-900 mb-6">环境检测</h3>
+                <p class="text-slate-600 mb-6">请确认以下系统要求已满足</p>
+                
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-slate-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                            </svg>
+                            <div>
+                                <p class="text-sm font-medium text-slate-900">PHP 版本</p>
+                                <p class="text-xs text-slate-500">需要 7.4 或更高</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-sm text-slate-600 mr-3">8.0.0</span>
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-slate-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4z"/>
+                            </svg>
+                            <div>
+                                <p class="text-sm font-medium text-slate-900">MySQL 扩展</p>
+                                <p class="text-xs text-slate-500">PDO 驱动支持</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-sm text-slate-600 mr-3">已启用</span>
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-slate-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            <div>
+                                <p class="text-sm font-medium text-slate-900">GD 扩展</p>
+                                <p class="text-xs text-slate-500">图片处理支持</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-sm text-slate-600 mr-3">已启用</span>
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-slate-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+                            </svg>
+                            <div>
+                                <p class="text-sm font-medium text-slate-900">mbstring 扩展</p>
+                                <p class="text-xs text-slate-500">多字节字符串支持</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-sm text-slate-600 mr-3">已启用</span>
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-slate-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
+                            </svg>
+                            <div>
+                                <p class="text-sm font-medium text-slate-900">config 目录</p>
+                                <p class="text-xs text-slate-500">需要写入权限</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-sm text-slate-600 mr-3">可写</span>
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl">
+                    <p class="text-sm text-green-700 font-medium">✓ 所有环境要求已满足</p>
+                </div>
+
+                <div class="mt-8 flex justify-end">
+                    <button onclick="nextStep(2)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium shadow-sm transition-colors flex items-center">
+                        开始配置
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Configuration -->
+            <div id="step2" class="step-content hidden p-8">
+                <h3 class="text-lg font-semibold text-slate-900 mb-6">配置信息</h3>
+                <p class="text-slate-600 mb-6">请填写以下配置信息</p>
+
+                <!-- Site Info -->
+                <div class="mb-8">
+                    <h4 class="text-sm font-medium text-slate-700 mb-4">站点配置</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">站点名称</label>
+                            <input type="text" value="LinkHub" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">站点 URL</label>
+                            <input type="url" value="https://linkhub.example.com" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Info -->
+                <div class="mb-8">
+                    <h4 class="text-sm font-medium text-slate-700 mb-4">管理员账号</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">管理员邮箱</label>
+                            <input type="email" value="admin@example.com" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">管理员密码</label>
+                            <input type="password" placeholder="至少8位字符" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database Info -->
+                <div class="mb-8">
+                    <h4 class="text-sm font-medium text-slate-700 mb-4">数据库配置</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">数据库主机</label>
+                            <input type="text" value="localhost" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">数据库端口</label>
+                            <input type="text" value="3306" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">数据库名称</label>
+                            <input type="text" value="linkhub_db" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">数据表前缀</label>
+                            <input type="text" value="lh_" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">数据库用户名</label>
+                            <input type="text" value="root" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">数据库密码</label>
+                            <input type="password" placeholder="请输入密码" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between">
+                    <button onclick="nextStep(1)" class="text-slate-600 hover:text-slate-800 px-6 py-3 rounded-xl font-medium transition-colors flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                        上一步
+                    </button>
+                    <button onclick="nextStep(3)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium shadow-sm transition-colors flex items-center">
+                        检查连接
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Installing -->
+            <div id="step3" class="step-content hidden p-8">
+                <h3 class="text-lg font-semibold text-slate-900 mb-6">正在安装</h3>
+                <p class="text-slate-600 mb-6">请稍候，系统正在配置中...</p>
+
+                <div class="space-y-3">
+                    <div class="flex items-center p-4 bg-slate-50 rounded-xl">
+                        <div id="install1" class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3">
+                        </div>
+                        <span class="text-sm text-slate-700">创建配置文件</span>
+                    </div>
+                    <div class="flex items-center p-4 bg-slate-50 rounded-xl">
+                        <div id="install2" class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3">
+                        </div>
+                        <span class="text-sm text-slate-700">连接数据库</span>
+                    </div>
+                    <div class="flex items-center p-4 bg-slate-50 rounded-xl">
+                        <div id="install3" class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3">
+                        </div>
+                        <span class="text-sm text-slate-700">创建数据表</span>
+                    </div>
+                    <div class="flex items-center p-4 bg-slate-50 rounded-xl">
+                        <div id="install4" class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3">
+                        </div>
+                        <span class="text-sm text-slate-700">导入初始数据</span>
+                    </div>
+                    <div class="flex items-center p-4 bg-slate-50 rounded-xl">
+                        <div id="install5" class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center mr-3">
+                        </div>
+                        <span class="text-sm text-slate-700">创建管理员账号</span>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex items-center justify-center">
+                    <svg class="animate-spin w-6 h-6 text-blue-600 mr-3" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span class="text-sm text-slate-600">正在执行安装...</span>
+                </div>
+            </div>
+
+            <!-- Step 4: Complete -->
+            <div id="step4" class="step-content hidden p-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto bg-green-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-2">安装成功！</h3>
+                    <p class="text-slate-600 mb-8">LinkHub 已成功安装并可以开始使用</p>
+
+                    <div class="bg-slate-50 rounded-xl p-6 mb-8 text-left">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm text-slate-500 mb-1">管理后台地址</p>
+                                <a href="/admin" class="text-blue-600 hover:text-blue-700 font-medium">/admin</a>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-500 mb-1">访问首页</p>
+                                <a href="/" class="text-blue-600 hover:text-blue-700 font-medium">点击访问</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-8 text-left">
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-amber-600 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                            </svg>
+                            <div>
+                                <p class="text-sm font-medium text-amber-800">安全提示</p>
+                                <p class="text-sm text-amber-700 mt-1">请立即删除 <code class="bg-amber-100 px-2 py-0.5 rounded">install.php</code> 文件，防止他人重新运行安装程序。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="/admin" class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium shadow-sm transition-colors">
+                        进入管理后台
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-12 py-6 border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <p class="text-sm text-slate-500">© 2026 LinkHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+
+        function updateProgress(step) {
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            
+            const progress = step * 25;
+            progressBar.style.width = progress + '%';
+            progressText.textContent = '步骤 ' + step + ' / 4';
+            
+            for (let i = 1; i <= 4; i++) {
+                const indicator = document.getElementById('step' + i + '-indicator');
+                const label = indicator.nextElementSibling;
+                
+                if (i < step) {
+                    indicator.classList.remove('bg-slate-200', 'text-slate-500');
+                    indicator.classList.add('bg-green-600', 'text-white');
+                    indicator.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
+                    label.classList.remove('text-slate-500');
+                    label.classList.add('text-slate-900');
+                } else if (i === step) {
+                    indicator.classList.remove('bg-slate-200', 'text-slate-500', 'bg-green-600');
+                    indicator.classList.add('bg-blue-600', 'text-white');
+                    indicator.textContent = i;
+                    label.classList.remove('text-slate-500');
+                    label.classList.add('text-slate-900');
+                } else {
+                    indicator.classList.remove('bg-blue-600', 'text-white', 'bg-green-600');
+                    indicator.classList.add('bg-slate-200', 'text-slate-500');
+                    indicator.textContent = i;
+                    label.classList.remove('text-slate-900');
+                    label.classList.add('text-slate-500');
+                }
+            }
+        }
+
+        function showStep(step) {
+            const contents = document.querySelectorAll('.step-content');
+            contents.forEach((content, index) => {
+                if (index + 1 === step) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+            updateProgress(step);
+        }
+
+        function nextStep(step) {
+            currentStep = step;
+            
+            if (step === 3) {
+                showStep(3);
+                simulateInstall();
+                return;
+            }
+            
+            showStep(step);
+        }
+
+        function simulateInstall() {
+            const steps = [
+                { id: 'install1', delay: 600 },
+                { id: 'install2', delay: 1300 },
+                { id: 'install3', delay: 2100 },
+                { id: 'install4', delay: 2900 },
+                { id: 'install5', delay: 3600 }
+            ];
+            
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    const el = document.getElementById(step.id);
+                    el.classList.remove('border-slate-300');
+                    el.classList.add('bg-green-600', 'border-green-600');
+                    el.innerHTML = '<svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
+                }, step.delay);
+            });
+            
+            setTimeout(() => {
+                showStep(4);
+            }, 4100);
+        }
+    </script>
+</body>
+</html>

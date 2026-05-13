@@ -1,0 +1,29 @@
+# Environment
+.env
+
+# Composer
+vendor/
+composer.lock
+
+# Storage
+storage/logs/
+storage/sessions/
+storage/views/
+storage/cache/
+storage/files/
+
+# IDE
+.vscode/
+.idea/
+
+# Claude
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp files
+*.log
+*.tmp
+*.cache

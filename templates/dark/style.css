@@ -1,0 +1,278 @@
+/* Dark Theme - 动态路径动画背景 */
+:root {
+    --primary: #60a5fa;
+    --primary-glow: rgba(96, 165, 250, 0.4);
+    --bg: #09090b;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --text: #fafafa;
+    --text-secondary: #a1a1aa;
+    --border: rgba(255, 255, 255, 0.08);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --radius: 0.5rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #09090b, #0a0a0a);
+}
+
+.floating-paths {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.paths {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.paths-1 {
+    top: -50%;
+    left: -50%;
+    animation: floatPaths 25s linear infinite;
+}
+
+.paths-2 {
+    top: -50%;
+    left: -50%;
+    animation: floatPathsReverse 30s linear infinite;
+}
+
+.animated-path,
+.animated-path-reverse {
+    animation: pathFlow 20s ease-in-out infinite;
+}
+
+.animated-path-reverse {
+    animation: pathFlowReverse 25s ease-in-out infinite;
+}
+
+@keyframes floatPaths {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(25%, 25%);
+    }
+}
+
+@keyframes floatPathsReverse {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(-25%, -25%);
+    }
+}
+
+@keyframes pathFlow {
+    0% {
+        stroke-dashoffset: 1000;
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 0.3;
+    }
+}
+
+@keyframes pathFlowReverse {
+    0% {
+        stroke-dashoffset: 0;
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        stroke-dashoffset: 1000;
+        opacity: 0.3;
+    }
+}
+
+.container {
+    position: relative;
+    z-index: 10;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.avatar-wrapper {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.5) 0%, rgba(167, 139, 250, 0.5) 50%, rgba(244, 114, 182, 0.5) 100%);
+    box-shadow: 0 0 50px rgba(96, 165, 250, 0.3);
+    animation: avatarGlow 4s ease-in-out infinite;
+}
+
+@keyframes avatarGlow {
+    0%, 100% {
+        box-shadow: 0 0 40px rgba(96, 165, 250, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 60px rgba(96, 165, 250, 0.5);
+    }
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 3px solid var(--bg);
+    transition: transform 0.2s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+}
+
+.name {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.bio {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+}
+
+.link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.link:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--primary);
+    color: var(--primary);
+    box-shadow: 0 8px 30px rgba(96, 165, 250, 0.2);
+    transform: translateY(-2px);
+}
+
+.link:active {
+    transform: translateY(0);
+}
+
+.link:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.link-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.link-text {
+    flex: 1;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+
+.footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+}
+
+.footer a:hover {
+    color: var(--primary);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(96, 165, 250, 0.3);
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.2);
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: 4rem 1rem;
+    }
+    
+    .avatar-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .name {
+        font-size: 1.625rem;
+    }
+    
+    .link {
+        padding: 0.875rem 1.25rem;
+        font-size: 0.875rem;
+    }
+}

@@ -1,0 +1,290 @@
+/* Gradient Theme - 动态渐变背景风格 */
+:root {
+    --gradient-start: rgb(108, 0, 162);
+    --gradient-end: rgb(0, 17, 82);
+    --first-color: 18, 113, 255;
+    --second-color: 221, 74, 255;
+    --third-color: 100, 220, 255;
+    --fourth-color: 200, 50, 50;
+    --fifth-color: 180, 180, 50;
+    --pointer-color: 140, 100, 255;
+    
+    --text: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.9);
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --card-text: #1e293b;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 8px 15px -3px rgba(0, 0, 0, 0.1);
+    --radius: 0.5rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(40deg, var(--gradient-start), var(--gradient-end));
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.gradient-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    overflow: hidden;
+    background: linear-gradient(40deg, var(--gradient-start), var(--gradient-end));
+}
+
+.gradient-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    filter: blur(80px);
+    opacity: 0.9;
+}
+
+.gradient-blob {
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: hard-light;
+}
+
+.blob-1 {
+    width: 80vmax;
+    height: 80vmax;
+    background: radial-gradient(circle at center, rgba(var(--first-color), 1) 0%, rgba(var(--first-color), 0) 50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: moveVertical 30s ease infinite;
+}
+
+.blob-2 {
+    width: 80vmax;
+    height: 80vmax;
+    background: radial-gradient(circle at center, rgba(var(--second-color), 0.8) 0%, rgba(var(--second-color), 0) 50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center calc(50% - 400px);
+    animation: moveInCircle 20s reverse infinite;
+}
+
+.blob-3 {
+    width: 80vmax;
+    height: 80vmax;
+    background: radial-gradient(circle at center, rgba(var(--third-color), 0.8) 0%, rgba(var(--third-color), 0) 50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center calc(50% + 400px);
+    animation: moveInCircle 40s linear infinite;
+}
+
+.blob-4 {
+    width: 80vmax;
+    height: 80vmax;
+    background: radial-gradient(circle at center, rgba(var(--fourth-color), 0.8) 0%, rgba(var(--fourth-color), 0) 50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center calc(50% - 200px);
+    animation: moveHorizontal 40s ease infinite;
+    opacity: 0.7;
+}
+
+.blob-5 {
+    width: 80vmax;
+    height: 80vmax;
+    background: radial-gradient(circle at center, rgba(var(--fifth-color), 0.8) 0%, rgba(var(--fifth-color), 0) 50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center calc(50% + 800px);
+    animation: moveInCircle 20s ease infinite;
+}
+
+.blob-mouse {
+    width: 100vmax;
+    height: 100vmax;
+    background: radial-gradient(circle at center, rgba(var(--pointer-color), 0.6) 0%, rgba(var(--pointer-color), 0) 50%);
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: hard-light;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+@keyframes moveVertical {
+    0% { transform: translate(-50%, -100%); }
+    50% { transform: translate(-50%, 0%); }
+    100% { transform: translate(-50%, -100%); }
+}
+
+@keyframes moveInCircle {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    50% { transform: translate(-50%, -50%) rotate(180deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes moveHorizontal {
+    0% { transform: translate(-100%, -50%); }
+    50% { transform: translate(0%, -50%); }
+    100% { transform: translate(-100%, -50%); }
+}
+
+.container {
+    position: relative;
+    z-index: 10;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.avatar-wrapper {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    padding: 4px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%);
+    backdrop-filter: blur(10px);
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 3px solid white;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+}
+
+.name {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.02em;
+}
+
+.bio {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--card-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-md);
+}
+
+.link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+}
+
+.link:active {
+    transform: translateY(0);
+}
+
+.link:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.link-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.link-text {
+    flex: 1;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+}
+
+.footer a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+}
+
+.footer a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: 4rem 1rem;
+    }
+    
+    .avatar-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .name {
+        font-size: 1.625rem;
+    }
+    
+    .link {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.8rem;
+    }
+}

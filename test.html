@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkHub - 本地测试页面</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 min-h-screen">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
+                LinkHub
+            </h1>
+            <p class="text-xl text-blue-200 mb-8">
+                社交链接聚合平台 - 本地测试页面
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="/install.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors">
+                    查看安装向导
+                </a>
+                <a href="/templates/index.html" class="bg-white/10 hover:bg-white/20 text-white px-8 py-3 rounded-lg font-medium transition-colors border border-white/20">
+                    预览主题展示
+                </a>
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid md:grid-cols-3 gap-8 mb-16">
+            <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div class="w-12 h-12 bg-blue-600/20 rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">链接聚合</h3>
+                <p class="text-slate-400">在一个页面展示所有社交媒体链接</p>
+            </div>
+
+            <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div class="w-12 h-12 bg-purple-600/20 rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">AI 生成</h3>
+                <p class="text-slate-400">智能生成个性化页面</p>
+            </div>
+
+            <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div class="w-12 h-12 bg-green-600/20 rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v2M7 7h10"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">数据分析</h3>
+                <p class="text-slate-400">实时追踪访问数据</p>
+            </div>
+        </div>
+
+        <!-- Project Structure -->
+        <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 mb-16">
+            <h2 class="text-2xl font-bold text-white mb-6">项目结构</h2>
+            <div class="grid md:grid-cols-2 gap-6 text-sm font-mono">
+                <div>
+                    <div class="text-blue-400 mb-2">📁 app/</div>
+                    <ul class="text-slate-400 space-y-1 ml-4">
+                        <li>├── Controllers/</li>
+                        <li>├── Models/</li>
+                        <li>├── Views/</li>
+                        <li>├── Libraries/</li>
+                        <li>└── Helpers/</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="text-blue-400 mb-2">📁 public/</div>
+                    <ul class="text-slate-400 space-y-1 ml-4">
+                        <li>├── index.php</li>
+                        <li>├── install.php</li>
+                        <li>└── .htaccess</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="text-blue-400 mb-2">📁 config/</div>
+                    <ul class="text-slate-400 space-y-1 ml-4">
+                        <li>├── app.php</li>
+                        <li>├── database.php</li>
+                        <li>├── ai.php</li>
+                        <li>└── themes.php</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="text-blue-400 mb-2">📁 templates/</div>
+                    <ul class="text-slate-400 space-y-1 ml-4">
+                        <li>├── minimal/</li>
+                        <li>├── gradient/</li>
+                        <li>├── card/</li>
+                        <li>├── dark/</li>
+                        <li>└── vintage/</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Start -->
+        <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 mb-16">
+            <h2 class="text-2xl font-bold text-white mb-6">快速开始</h2>
+            <div class="space-y-4 text-sm font-mono">
+                <div class="bg-black/30 rounded-lg p-4">
+                    <div class="text-green-400 mb-2">1. 环境要求</div>
+                    <div class="text-slate-300">
+                        PHP 7.4+ / MySQL 5.7+ / Apache or Nginx
+                    </div>
+                </div>
+                <div class="bg-black/30 rounded-lg p-4">
+                    <div class="text-green-400 mb-2">2. 安装步骤</div>
+                    <div class="text-slate-300 space-y-1">
+                        <div>• 上传项目到服务器</div>
+                        <div>• 访问 /install.php</div>
+                        <div>• 配置数据库信息</div>
+                        <div>• 创建管理员账号</div>
+                        <div>• 完成安装</div>
+                    </div>
+                </div>
+                <div class="bg-black/30 rounded-lg p-4">
+                    <div class="text-green-400 mb-2">3. 本地预览</div>
+                    <div class="text-slate-300">
+                        <a href="/templates/index.html" class="text-blue-400 hover:text-blue-300">点击查看主题预览</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status -->
+        <div class="text-center">
+            <div class="inline-flex items-center gap-2 bg-green-600/20 text-green-400 px-4 py-2 rounded-full text-sm">
+                <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                项目文件已就绪
+            </div>
+        </div>
+    </div>
+</body>
+</html>

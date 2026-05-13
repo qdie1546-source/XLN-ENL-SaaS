@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收银台 - LinkHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .payment-method {
+            transition: all 0.2s ease;
+        }
+        .payment-method:hover {
+            border-color: #6366f1;
+        }
+        .payment-method.selected {
+            border-color: #6366f1;
+            background-color: #eef2ff;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        }
+        .security-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <div class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                LinkHub
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Payment Form -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                    <!-- Order Info -->
+                    <div class="p-6 border-b border-gray-200">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">订单信息</h2>
+                        <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                            <div>
+                                <div class="font-medium text-gray-900">专业版月度订阅</div>
+                                <div class="text-sm text-gray-500">解锁全部 AI 功能和高级特性</div>
+                            </div>
+                            <div class="text-lg font-semibold text-gray-900">¥49.00</div>
+                        </div>
+                        <div class="flex items-center justify-between py-3">
+                            <div class="text-sm text-gray-600">支付周期</div>
+                            <div class="text-sm font-medium text-gray-900">每月自动续费</div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Methods -->
+                    <div class="p-6">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">选择支付方式</h2>
+                        
+                        <!-- Payment Method Tabs -->
+                        <div class="flex space-x-2 mb-6 overflow-x-auto">
+                            <button onclick="selectPaymentTab('card')" id="tab-card" class="px-4 py-2 text-sm font-medium rounded-lg bg-indigo-50 text-indigo-600">
+                                💳 银行卡
+                            </button>
+                            <button onclick="selectPaymentTab('alipay')" id="tab-alipay" class="px-4 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-100">
+                                支付宝
+                            </button>
+                            <button onclick="selectPaymentTab('wechat')" id="tab-wechat" class="px-4 py-2 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-100">
+                                微信支付
+                            </button>
+                        </div>
+
+                        <!-- Card Payment Form -->
+                        <div id="payment-card" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">持卡人姓名</label>
+                                <input type="text" placeholder="请输入持卡人姓名" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">卡号</label>
+                                <div class="relative">
+                                    <input type="text" placeholder="1234 5678 9012 3456" maxlength="19" class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
+                                    <div class="absolute left-4 top-1/2 transform -translate-y-1/2">
+                                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">有效期</label>
+                                    <input type="text" placeholder="MM/YY" maxlength="5" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">CVV</label>
+                                    <div class="relative">
+                                        <input type="password" placeholder="•••" maxlength="3" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
+                                        <div class="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer group">
+                                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Alipay Payment -->
+                        <div id="payment-alipay" class="hidden">
+                            <div class="text-center py-12">
+                                <div class="w-32 h-32 mx-auto bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-4">
+                                    <span class="text-4xl">¥</span>
+                                </div>
+                                <p class="text-gray-600 mb-4">点击下方按钮跳转至支付宝完成支付</p>
+                                <button class="px-6 py-3 bg-blue-500 text-white font-medium rounded-xl hover:bg-blue-600 transition-colors">
+                                    打开支付宝支付
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- WeChat Payment -->
+                        <div id="payment-wechat" class="hidden">
+                            <div class="text-center py-12">
+                                <div class="w-32 h-32 mx-auto bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mb-4">
+                                    <span class="text-4xl text-white">W</span>
+                                </div>
+                                <p class="text-gray-600 mb-4">点击下方按钮跳转至微信完成支付</p>
+                                <button class="px-6 py-3 bg-green-500 text-white font-medium rounded-xl hover:bg-green-600 transition-colors">
+                                    打开微信支付
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="p-6 bg-gray-50 border-t border-gray-200">
+                        <button class="w-full py-4 btn-primary text-white font-semibold rounded-xl hover:opacity-90 transition-opacity">
+                            确认支付 ¥49.00
+                        </button>
+                        <div class="flex items-center justify-center mt-4 text-sm text-gray-500">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                            支付安全，由 SSL 加密保护
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden sticky top-8">
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">订单摘要</h3>
+                        
+                        <!-- Plan Details -->
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-4">
+                                    <div class="font-medium text-gray-900">专业版</div>
+                                    <div class="text-sm text-gray-500">月度订阅</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Features Included -->
+                        <div class="border-t border-gray-200 pt-4 mb-6">
+                            <div class="text-sm font-medium text-gray-700 mb-3">包含功能</div>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    无限链接页面
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    AI 内容生成
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    高级数据分析
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    自定义域名
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Price Breakdown -->
+                        <div class="border-t border-gray-200 pt-4 space-y-3">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">商品金额</span>
+                                <span class="text-gray-900">¥49.00</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">优惠</span>
+                                <span class="text-green-600">-¥0.00</span>
+                            </div>
+                            <div class="flex justify-between text-lg font-semibold pt-3 border-t border-gray-200">
+                                <span class="text-gray-900">应付金额</span>
+                                <span class="text-indigo-600">¥49.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Badges -->
+                    <div class="p-6 bg-gray-50 border-t border-gray-200">
+                        <div class="flex items-center justify-center space-x-4">
+                            <div class="flex items-center text-xs text-gray-500">
+                                <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                安全支付
+                            </div>
+                            <div class="flex items-center text-xs text-gray-500">
+                                <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                数据加密
+                            </div>
+                            <div class="flex items-center text-xs text-gray-500">
+                                <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
+                                    <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"></path>
+                                </svg>
+                                多种支付
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-8 text-center text-sm text-gray-500">
+            <p>支付完成后，您将自动升级到专业版</p>
+            <p class="mt-1">如需帮助，请联系 support@linkhub.com</p>
+        </div>
+    </div>
+
+    <script>
+        function selectPaymentTab(tab) {
+            // Hide all payment forms
+            document.getElementById('payment-card').classList.add('hidden');
+            document.getElementById('payment-alipay').classList.add('hidden');
+            document.getElementById('payment-wechat').classList.add('hidden');
+            
+            // Reset all tabs
+            document.getElementById('tab-card').classList.remove('bg-indigo-50', 'text-indigo-600');
+            document.getElementById('tab-card').classList.add('text-gray-600', 'hover:bg-gray-100');
+            document.getElementById('tab-alipay').classList.remove('bg-indigo-50', 'text-indigo-600');
+            document.getElementById('tab-alipay').classList.add('text-gray-600', 'hover:bg-gray-100');
+            document.getElementById('tab-wechat').classList.remove('bg-indigo-50', 'text-indigo-600');
+            document.getElementById('tab-wechat').classList.add('text-gray-600', 'hover:bg-gray-100');
+            
+            // Show selected payment form
+            document.getElementById('payment-' + tab).classList.remove('hidden');
+            
+            // Highlight selected tab
+            const selectedTab = document.getElementById('tab-' + tab);
+            selectedTab.classList.add('bg-indigo-50', 'text-indigo-600');
+            selectedTab.classList.remove('text-gray-600', 'hover:bg-gray-100');
+        }
+
+        // Card number formatting
+        const cardInput = document.querySelector('input[placeholder*="1234"]');
+        if (cardInput) {
+            cardInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s/g, '').replace(/\D/g, '');
+                let formattedValue = value.match(/.{1,4}/g)?.join(' ') || '';
+                e.target.value = formattedValue;
+            });
+        }
+    </script>
+</body>
+</html>

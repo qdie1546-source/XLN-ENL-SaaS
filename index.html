@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkHub - 社交链接聚合平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        
+        /* Dark Theme Preview Styles */
+        .dark-preview-container {
+            position: relative;
+            background: linear-gradient(135deg, #09090b 0%, #0a0a0a 50%, #111111 100%);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            overflow: hidden;
+        }
+        
+        .dark-preview-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .dark-preview-paths {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .dark-preview-paths-1 {
+            animation: floatPaths 25s linear infinite;
+        }
+        
+        .dark-preview-paths-2 {
+            animation: floatPathsReverse 30s linear infinite;
+        }
+        
+        .dark-preview-path {
+            animation: pathFlow 20s ease-in-out infinite;
+        }
+        
+        .dark-preview-path-reverse {
+            animation: pathFlowReverse 25s ease-in-out infinite;
+        }
+        
+        @keyframes floatPaths {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(25%, 25%); }
+        }
+        
+        @keyframes floatPathsReverse {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-25%, -25%); }
+        }
+        
+        @keyframes pathFlow {
+            0% { stroke-dashoffset: 1000; opacity: 0.3; }
+            50% { opacity: 0.6; }
+            100% { stroke-dashoffset: 0; opacity: 0.3; }
+        }
+        
+        @keyframes pathFlowReverse {
+            0% { stroke-dashoffset: 0; opacity: 0.3; }
+            50% { opacity: 0.6; }
+            100% { stroke-dashoffset: 1000; opacity: 0.3; }
+        }
+        
+        .dark-preview-card {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .dark-preview-avatar-wrapper {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.6) 0%, rgba(167, 139, 250, 0.6) 50%, rgba(244, 114, 182, 0.6) 100%);
+            box-shadow: 0 0 40px rgba(96, 165, 250, 0.4);
+            animation: avatarGlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes avatarGlow {
+            0%, 100% { box-shadow: 0 0 35px rgba(96, 165, 250, 0.35); }
+            50% { box-shadow: 0 0 50px rgba(96, 165, 250, 0.5); }
+        }
+        
+        .dark-preview-avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #0a0a0a;
+        }
+        
+        .dark-preview-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fafafa;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .dark-preview-bio {
+            font-size: 0.95rem;
+            color: #a1a1aa;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .dark-preview-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .dark-preview-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+            color: #fafafa;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .dark-preview-link:hover {
+            background: rgba(96, 165, 250, 0.15);
+            border-color: rgba(96, 165, 250, 0.4);
+            color: #60a5fa;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(96, 165, 250, 0.25);
+        }
+        
+        .dark-preview-link:active {
+            transform: translateY(0);
+        }
+        
+        .dark-preview-link-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+        
+        .dark-preview-link-text {
+            flex: 1;
+        }
+        
+        .dark-preview-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .dark-preview-footer-link {
+            color: #a1a1aa;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .dark-preview-footer-link:hover {
+            color: #60a5fa;
+        }
+        
+        @media (max-width: 768px) {
+            .dark-preview-card {
+                padding: 2rem;
+            }
+            
+            .dark-preview-avatar-wrapper {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .dark-preview-name {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+    <script>
+        // Site Configuration
+        const SITE_CONFIG = {
+            site_name: 'LinkHub',
+            site_logo: '',
+            site_description: '社交链接聚合平台',
+            ai_enabled: true,
+            ai_model: 'gpt-3.5-turbo',
+            maintenance_mode: false,
+            allow_registration: true
+        };
+        
+        // Update page with dynamic site name
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update all instances of LinkHub in the header
+            const siteNameElements = document.querySelectorAll('[data-site-name]');
+            siteNameElements.forEach(function(el) {
+                el.textContent = SITE_CONFIG.site_name;
+            });
+            
+            // Update title
+            document.title = SITE_CONFIG.site_name + ' - 社交链接聚合平台';
+        });
+    </script>
+</head>
+<body class="bg-white min-h-screen">
+    <!-- Header -->
+    <header class="border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                        </svg>
+                    </div>
+                    <span data-site-name class="text-xl font-semibold tracking-tight text-gray-900">LinkHub</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="/login.html" class="text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors">登录</a>
+                    <a href="/register.html" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all">注册</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Dark Theme Preview -->
+    <section class="py-16 md:py-24 px-4 md:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                        AI 智能生成<br>专属链接页面
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-xl">
+                        只需描述你的个人品牌，AI 就能智能生成专属链接页面。聚合微博、微信、抖音、小红书等社交媒体，一站式管理，简单分享。
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="/register.html" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg font-medium transition-all shadow-lg shadow-blue-500/25">
+                            免费开始使用
+                        </a>
+                        <a href="/templates/index.html" class="bg-gray-100 hover:bg-gray-200 text-gray-900 px-6 py-3 rounded-lg font-medium transition-colors">
+                            查看主题
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Dark Theme Preview -->
+                <div class="dark-preview-container">
+                    <div class="dark-preview-background">
+                        <svg class="dark-preview-paths dark-preview-paths-1" viewBox="0 0 696 316" fill="none">
+                            <path class="dark-preview-path" d="M-380 -189C-380 -189 -312 216 152 343C616 470 684 875 684 875" stroke="currentColor" stroke-width="0.5" opacity="0.1"/>
+                            <path class="dark-preview-path" d="M-385 -195C-385 -195 -317 210 147 337C611 464 679 869 679 869" stroke="currentColor" stroke-width="0.53" opacity="0.13"/>
+                            <path class="dark-preview-path" d="M-390 -201C-390 -201 -322 204 142 331C606 458 674 863 674 863" stroke="currentColor" stroke-width="0.56" opacity="0.16"/>
+                            <path class="dark-preview-path" d="M-395 -207C-395 -207 -327 198 137 325C601 452 669 857 669 857" stroke="currentColor" stroke-width="0.59" opacity="0.19"/>
+                            <path class="dark-preview-path" d="M-400 -213C-400 -213 -332 192 132 319C596 446 664 851 664 851" stroke="currentColor" stroke-width="0.62" opacity="0.22"/>
+                            <path class="dark-preview-path" d="M-405 -219C-405 -219 -337 186 127 313C591 440 659 845 659 845" stroke="currentColor" stroke-width="0.65" opacity="0.25"/>
+                            <path class="dark-preview-path" d="M-410 -225C-410 -225 -342 180 122 307C586 434 654 839 654 839" stroke="currentColor" stroke-width="0.68" opacity="0.28"/>
+                            <path class="dark-preview-path" d="M-415 -231C-415 -231 -347 174 117 301C581 428 649 833 649 833" stroke="currentColor" stroke-width="0.71" opacity="0.31"/>
+                            <path class="dark-preview-path" d="M-420 -237C-420 -237 -352 168 112 295C576 422 644 827 644 827" stroke="currentColor" stroke-width="0.74" opacity="0.34"/>
+                            <path class="dark-preview-path" d="M-425 -243C-425 -243 -357 162 107 289C571 416 639 821 639 821" stroke="currentColor" stroke-width="0.77" opacity="0.37"/>
+                            <path class="dark-preview-path" d="M-430 -249C-430 -249 -362 156 102 283C566 410 634 815 634 815" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+                        </svg>
+                        <svg class="dark-preview-paths dark-preview-paths-2" viewBox="0 0 696 316" fill="none">
+                            <path class="dark-preview-path-reverse" d="M-380 -189C-380 -189 -312 216 152 343C616 470 684 875 684 875" stroke="currentColor" stroke-width="0.5" opacity="0.1"/>
+                            <path class="dark-preview-path-reverse" d="M-385 -195C-385 -195 -317 210 147 337C611 464 679 869 679 869" stroke="currentColor" stroke-width="0.53" opacity="0.13"/>
+                            <path class="dark-preview-path-reverse" d="M-390 -201C-390 -201 -322 204 142 331C606 458 674 863 674 863" stroke="currentColor" stroke-width="0.56" opacity="0.16"/>
+                            <path class="dark-preview-path-reverse" d="M-395 -207C-395 -207 -327 198 137 325C601 452 669 857 669 857" stroke="currentColor" stroke-width="0.59" opacity="0.19"/>
+                            <path class="dark-preview-path-reverse" d="M-400 -213C-400 -213 -332 192 132 319C596 446 664 851 664 851" stroke="currentColor" stroke-width="0.62" opacity="0.22"/>
+                            <path class="dark-preview-path-reverse" d="M-405 -219C-405 -219 -337 186 127 313C591 440 659 845 659 845" stroke="currentColor" stroke-width="0.65" opacity="0.25"/>
+                            <path class="dark-preview-path-reverse" d="M-410 -225C-410 -225 -342 180 122 307C586 434 654 839 654 839" stroke="currentColor" stroke-width="0.68" opacity="0.28"/>
+                            <path class="dark-preview-path-reverse" d="M-415 -231C-415 -231 -347 174 117 301C581 428 649 833 649 833" stroke="currentColor" stroke-width="0.71" opacity="0.31"/>
+                            <path class="dark-preview-path-reverse" d="M-420 -237C-420 -237 -352 168 112 295C576 422 644 827 644 827" stroke="currentColor" stroke-width="0.74" opacity="0.34"/>
+                            <path class="dark-preview-path-reverse" d="M-425 -243C-425 -243 -357 162 107 289C571 416 639 821 639 821" stroke="currentColor" stroke-width="0.77" opacity="0.37"/>
+                            <path class="dark-preview-path-reverse" d="M-430 -249C-430 -249 -362 156 102 283C566 410 634 815 634 815" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="dark-preview-card">
+                        <div class="dark-preview-avatar-wrapper">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=face" alt="Profile Avatar" class="dark-preview-avatar">
+                        </div>
+                        <h2 class="dark-preview-name">陈逸凡</h2>
+                        <p class="dark-preview-bio">全栈开发者 · 科技爱好者</p>
+                        
+                        <div class="dark-preview-links">
+                            <a href="#" class="dark-preview-link">
+                                <svg class="dark-preview-link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                <span class="dark-preview-link-text">微信</span>
+                            </a>
+                            <a href="#" class="dark-preview-link">
+                                <svg class="dark-preview-link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                                <span class="dark-preview-link-text">微博</span>
+                            </a>
+                            <a href="#" class="dark-preview-link">
+                                <svg class="dark-preview-link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                                <span class="dark-preview-link-text">小红书</span>
+                            </a>
+                            <a href="#" class="dark-preview-link">
+                                <svg class="dark-preview-link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                                <span class="dark-preview-link-text">抖音</span>
+                            </a>
+                        </div>
+                        
+                        <div class="dark-preview-footer">
+                            <a href="/" class="dark-preview-footer-link" data-site-name>Powered by LinkHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">为什么选择 <span data-site-name>LinkHub</span>？</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">简单、快速，专业，让你的粉丝轻松找到你</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">快速创建</h3>
+                    <p class="text-gray-600">3分钟创建专属链接页面，无需任何技术背景</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">精美主题</h3>
+                    <p class="text-gray-600">多款精选主题，一键切换，打造个性化页面</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-100 to-green-200 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">数据分析</h3>
+                    <p class="text-gray-600">实时追踪访问数据，了解你的受众群体</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all">
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">移动端优化</h3>
+                    <p class="text-gray-600">完美适配手机端，触屏体验流畅舒适</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all">
+                    <div class="w-12 h-12 bg-gradient-to-br from-pink-100 to-pink-200 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">AI 生成</h3>
+                    <p class="text-gray-600">智能生成个性化页面描述和内容</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all">
+                    <div class="w-12 h-12 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">安全可靠</h3>
+                    <p class="text-gray-600">企业级安全标准，保护你的数据和隐私</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 md:py-24 px-4 md:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">准备好开始了吗？</h2>
+            <p class="text-lg text-gray-600 mb-8">免费注册，立即创建你的专属链接页面</p>
+            <a href="/register.html" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all shadow-lg shadow-blue-500/25">
+                立即免费注册
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4 md:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                        </svg>
+                    </div>
+                    <span data-site-name class="text-xl font-semibold">LinkHub</span>
+                </div>
+                <div class="flex gap-8 text-sm text-gray-400">
+                    <a href="/templates/index.html" class="hover:text-white transition-colors">主题</a>
+                    <a href="/login.html" class="hover:text-white transition-colors">登录</a>
+                    <a href="/register.html" class="hover:text-white transition-colors">注册</a>
+                </div>
+                <div class="text-sm text-gray-400">
+                    © 2026 <span data-site-name>LinkHub</span>. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
